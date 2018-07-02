@@ -30,11 +30,11 @@ io.on('connection', (socket) => {
   // });
 
   //vid108 emitting and listening to events
-  socket.emit('newMessage', {
-    author:'server',
-    message:'you are now connected',
-    date: new Date().getTime()
-  });
+  // socket.emit('newMessage', {
+  //   author:'server',
+  //   message:'you are now connected',
+  //   date: new Date().getTime()
+  // });
 
   //example
   // socket.on('createEmail', (createdEmail) => {
@@ -44,6 +44,12 @@ io.on('connection', (socket) => {
   //vid108 emitting and listening to events
   socket.on('createMessage', (message) => {
     console.log('createMessage', message);
+
+    io.emit('newMessage', {
+      from: message.from,
+      text: message.text,
+      createdAt: new Date().getTime()
+    });
   });
 
   socket.on('disconnect', () => {

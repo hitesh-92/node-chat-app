@@ -11,10 +11,12 @@ socket.on('connect', function() {
   // });
 
   //vid108 emitting and listening to events
-  socket.emit('createMessage', {
-    from: 'CLIENT browser',
-    message: 'this is from index.js!'
-  });
+  // socket.emit('createMessage', {
+  //   from: 'CLIENT browser',
+  //   text: 'this is from index.js!'
+  // });
+
+
 
 });
 
@@ -31,8 +33,8 @@ socket.on('disconnect', function() {
 // });
 
 //vid108 emitting and listening to events
-socket.on('newMessage', function(serverMsg){
-  msg = `From: ${serverMsg.author} | ${serverMsg.message} | At: ${serverMsg.date}`;
+socket.on('newMessage', function(message){
+  msg = `From: ${message.from} | ${message.text} | At: ${message.createdAt}`;
   document.getElementById('test').innerHTML = msg;
   console.log(msg);
 });
