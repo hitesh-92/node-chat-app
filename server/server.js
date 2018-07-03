@@ -41,16 +41,42 @@ io.on('connection', (socket) => {
   //   console.log('createEmail', createdEmail);
   // });
 
+  //vid110
+  socket.emit('newUser', {
+    from: 'Admin',
+    text: 'Welcome to the chat app',
+    createdAt: new Date().getTime()
+  });
+  socket.broadcast.emit('newUser', {
+    from: 'Admin',
+    text: 'New User joined',
+    createdAt: new Date().getTime()
+  });
+
   //vid108 emitting and listening to events
   socket.on('createMessage', (message) => {
     console.log('createMessage', message);
 
-    io.emit('newMessage', {
-      from: message.from,
-      text: message.text,
-      createdAt: new Date().getTime()
-    });
-  });
+    // //send message to everyone, including yourself
+    // //from browser console, run: socket.emit('createMessage', {from:'someone', text:'lorem ipsom'})
+    // io.emit('newMessage', {
+    //   from: message.from,
+    //   text: message.text,
+    //   createdAt: new Date().getTime()
+    // });
+
+    // // broadcast message. sends message to all everyone connected but yourself
+    // socket.broadcast.emit('newMessage', {
+    //   from: message.from,
+    //   text: message.text,
+    //   createdAt: new Date().getTime()
+    // });
+
+
+
+
+
+  });//createMessage
 
   socket.on('disconnect', () => {
     console.log(`user disconnected`);

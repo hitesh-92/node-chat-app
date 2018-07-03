@@ -38,3 +38,9 @@ socket.on('newMessage', function(message){
   document.getElementById('test').innerHTML = msg;
   console.log(msg);
 });
+
+//vid110
+socket.on('newUser', function(msg) {
+  // console.log(`from: ${msg.from} | ${msg.text} | sentAt: ${msg.createdAt}`);
+  console.log(msg);
+});
