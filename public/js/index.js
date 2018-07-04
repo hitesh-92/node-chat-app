@@ -16,9 +16,7 @@ socket.on('connect', function() {
   //   text: 'this is from index.js!'
   // });
 
-
-
-});
+});//connect
 
 
 
@@ -37,10 +35,35 @@ socket.on('newMessage', function(message){
   msg = `From: ${message.from} | ${message.text} | At: ${message.createdAt}`;
   document.getElementById('test').innerHTML = msg;
   console.log(msg);
+
+  var li = jQuery('<li></li>');
+  li.text(`${message.from}: ${message.text}`);
+
+  jQuery('#messages').append(li);
 });
 
 //vid110
 socket.on('newUser', function(msg) {
   // console.log(`from: ${msg.from} | ${msg.text} | sentAt: ${msg.createdAt}`);
   console.log(msg);
+});
+
+//vid112 - event acknowledgments
+ socket.emit('createMessage', {
+   from: 'Frank',
+   text: 'Hello'
+ }, function(data){
+   console.log('Got it', data);
+});
+
+
+jQuery('#message-form').on('submit', function(e){
+  e.preventDefault();
+
+  socket.emit('createMessage', {
+    from:'User',
+    text: jQuery('[name=message]').val()
+  }, function() {
+
+  });
 });

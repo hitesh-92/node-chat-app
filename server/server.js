@@ -61,11 +61,11 @@ io.on('connection', (socket) => {
   socket.broadcast.emit('newMessage', generateMessage('Admin','New user joined'));
 
   //vid108 emitting and listening to events
-  socket.on('createMessage', (message) => {
+  socket.on('createMessage', (message, callback) => {
     console.log('createMessage', message);
     //vid111
     io.emit('newMessage', generateMessage(message.from, message.text));
-
+    callback('this is from the server');
     // //send message to everyone, including yourself
     // //from browser console, run: socket.emit('createMessage', {from:'someone', text:'lorem ipsom'})
     // io.emit('newMessage', {
