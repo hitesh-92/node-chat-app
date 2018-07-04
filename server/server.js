@@ -5,6 +5,7 @@ const path = require('path');
 const http = require('http');
 
 const port = process.env.PORT || 5050;
+const {generateMessage} = require('./utils/message');
 const publicPath = path.join(__dirname, '../public');
 // publicPath. the path to the dir is cleaner and cross-os friendly
 // console.log(__dirname + '/../public');
@@ -42,6 +43,7 @@ io.on('connection', (socket) => {
   // });
 
   //vid110
+  /*
   socket.emit('newUser', {
     from: 'Admin',
     text: 'Welcome to the chat app',
@@ -52,10 +54,17 @@ io.on('connection', (socket) => {
     text: 'New User joined',
     createdAt: new Date().getTime()
   });
+  */
+
+  //vid111 generateMessage & test
+  socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat App'));
+  socket.broadcast.emit('newMessage', generateMessage('Admin','New user joined'));
 
   //vid108 emitting and listening to events
   socket.on('createMessage', (message) => {
     console.log('createMessage', message);
+    //vid111
+    io.emit('newMessage', generateMessage(message.from, message.text));
 
     // //send message to everyone, including yourself
     // //from browser console, run: socket.emit('createMessage', {from:'someone', text:'lorem ipsom'})
