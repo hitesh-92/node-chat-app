@@ -13,6 +13,7 @@
   <body>
     <p>Welcome, to the chatApp</p>
 
+    <!-- init testing -->
     <p id="status"></p>
     <p id="test"></p>
 
@@ -20,6 +21,7 @@
 
     <ol id="messages"></ol>
 
+    <!-- user input -->
     <form id="message-form">
 
       <input type="text" name="message" placeholder="Enter Message">
@@ -27,6 +29,11 @@
       <button>Send</button>
 
     </form>
+
+    <br>
+
+    <!-- geolocation  -->
+    <button id="send-location">Send Location</button>
 
 
     <script src="/socket.io/socket.io.js"></script>

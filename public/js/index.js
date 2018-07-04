@@ -57,6 +57,7 @@ socket.on('newUser', function(msg) {
 });
 
 
+//User input form
 jQuery('#message-form').on('submit', function(e){
   e.preventDefault();
 
@@ -65,5 +66,23 @@ jQuery('#message-form').on('submit', function(e){
     text: jQuery('[name=message]').val()
   }, function() {
 
+  });
+});
+
+//Geolocation button
+var locationButton = jQuery('#send-location');
+locationButton.on('click', function(){
+  if(!navigator.geolocation){
+    return alert('Geolocation not supported by browser');
+  }
+
+  navigator.geolocation.getCurrentPosition(function(position){
+    // console.log(position);
+    socket.emit('createLocationMessage', {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    })
+    }, function(){
+      alert('unable to fetch location')
   });
 });
