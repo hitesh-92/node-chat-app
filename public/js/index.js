@@ -34,20 +34,26 @@ socket.on('disconnect', function() {
 socket.on('newMessage', function(message){
   // msg = `From: ${message.from} | ${message.text} | At: ${message.createdAt}`;
   // document.getElementById('test').innerHTML = msg;
-  console.log(message);
+  // console.log(message);
 
-  var formattedTime = moment(message.createdAt).format('h:mm a');
-  var li = jQuery('<li></li>');
-  li.text(`${message.from} ${formattedTime}: ${message.text}`);
+  //template
+  var template = jQuery('#message-template').html();
+  // var template = '<p>testing</p>'
+  var html = Mustache.render(template);
+  jQuery('#messages').append(html);
 
-  jQuery('#messages').append(li);
+  // var formattedTime = moment(message.createdAt).format('h:mm a');
+  // var li = jQuery('<li></li>');
+  // li.text(`${message.from} ${formattedTime}: ${message.text}`);
+  //
+  // jQuery('#messages').append(li);
 });
 
 //vid110
-socket.on('newUser', function(msg) {
+// socket.on('newUser', function(msg) {
   // console.log(`from: ${msg.from} | ${msg.text} | sentAt: ${msg.createdAt}`);
-  console.log(msg);
-});
+  // console.log(msg);
+// });
 
 //vid112 - event acknowledgments
 //  socket.emit('createMessage', {

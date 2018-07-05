@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>socket.io chat app</title>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" charset="utf-8"></script>
 
     <!-- <style media="screen">
       p{color: red}
@@ -51,12 +51,14 @@
     <!-- <br> -->
 
 
-
+    <script id="message-template" type="text/template">
+      <p>This is a template</p>
+    </script>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/index.js"></script>
     <script src="/js/libs/moment.js"></script>
-
+    <script src="/js/libs/mustache.js"></script>
+    <script src="/js/index.js"></script>
 
   </body>
 </html>
