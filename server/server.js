@@ -5,7 +5,7 @@ const path = require('path');
 const http = require('http');
 
 const port = process.env.PORT || 5050;
-const {generateMessage} = require('./utils/message');
+const {generateMessage, generateLocationMessage} = require('./utils/message');
 const publicPath = path.join(__dirname, '../public');
 // publicPath. the path to the dir is cleaner and cross-os friendly
 // console.log(__dirname + '/../public');
@@ -87,8 +87,10 @@ io.on('connection', (socket) => {
 
   });//createMessage
 
+
+  //Geolocation
   socket.on('createLocationMessage', (coords) => {
-    io.emit('newMessage', generateMessage('Admin', `${coords.latitude}, ${coords.longitude}`));
+    io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
 
   });//createLocationMessage
 

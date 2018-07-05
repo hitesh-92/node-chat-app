@@ -86,3 +86,17 @@ locationButton.on('click', function(){
       alert('unable to fetch location')
   });
 });
+
+
+//Geolocation
+socket.on('newLocationMessage', function(message){
+  var li = jQuery('<li></li>');
+  var a = jQuery('<a target="_blank">My current location</a>');
+
+  //This method prevents any malicious html injections
+  li.text(`${message.from}: `);
+  a.attr('href', message.url);
+  li.append(a);
+
+  jQuery('#messages').append(li);
+});
