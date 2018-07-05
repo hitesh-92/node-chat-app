@@ -32,12 +32,13 @@ socket.on('disconnect', function() {
 
 //vid108 emitting and listening to events
 socket.on('newMessage', function(message){
-  msg = `From: ${message.from} | ${message.text} | At: ${message.createdAt}`;
+  // msg = `From: ${message.from} | ${message.text} | At: ${message.createdAt}`;
   // document.getElementById('test').innerHTML = msg;
-  console.log(msg);
+  console.log(message);
 
+  var formattedTime = moment(message.createdAt).format('h:mm a');
   var li = jQuery('<li></li>');
-  li.text(`${message.from}: ${message.text}`);
+  li.text(`${message.from} ${formattedTime}: ${message.text}`);
 
   jQuery('#messages').append(li);
 });
@@ -101,11 +102,12 @@ locationButton.on('click', function(){
 
 //Geolocation
 socket.on('newLocationMessage', function(message){
+  var formattedTime = moment(message.ceatedAt).format('h:mm a')
   var li = jQuery('<li></li>');
   var a = jQuery('<a target="_blank">My current location</a>');
 
   //This method prevents any malicious html injections
-  li.text(`${message.from}: `);
+  li.text(`${message.from} ${formattedTime}: `);
   a.attr('href', message.url);
   li.append(a);
 

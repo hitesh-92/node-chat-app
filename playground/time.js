@@ -7,12 +7,19 @@ const moment = require('moment');
 // const date = new Date();
 // console.log(date.getMonth());
 
-var date = moment();
+// var date = moment();
 
 // console.log(date.format('MMM Do, YYYY'));
 
-console.log(date.format('HH:MM a \n'));
+// console.log(date.format('HH:MM a \n'));
 
 
-morn = date.subtract(12, 'hours').format('H:MM a')
-console.log(morn);
+// morn = date.subtract(12, 'hours').format('H:MM a')
+// console.log(morn);
+
+const ts = moment().valueOf();
+console.log(ts);
+
+// const createdAt = 1234;
+// const date = moment(createdAt);
+// console.log(date.format('h:mm a'));
