@@ -6,34 +6,51 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" charset="utf-8"></script>
 
-    <style media="screen">
+    <!-- <style media="screen">
       p{color: red}
-    </style>
+    </style> -->
+
+  <link rel="stylesheet" href="./css/styles.css">
   </head>
-  <body>
-    <p>Welcome, to the chatApp</p>
-
+  <body class="chat">
+    <!-- <p>Welcome, to the chatApp</p> -->
+    <div class="chat__sidebar">
+      <h3>Users</h3>
+      <div id="user"></div>
+    </div>
     <!-- init testing -->
-    <p id="status"></p>
-    <p id="test"></p>
+    <!-- <p id="status"></p>
+    <p id="test"></p> -->
 
-    <br />
+    <!-- <br /> -->
 
-    <ol id="messages"></ol>
+    <div class="chat__main">
 
-    <!-- user input -->
-    <form id="message-form">
+      <ol id="messages" class="chat__messages"></ol>
 
-      <input type="text" name="message" placeholder="Enter Message">
+      <div class="chat__footer">
+        <form id="message-form">
 
-      <button>Send</button>
+          <input type="text" name="message" placeholder="Enter Message" autofocus autocomplete="off" >
 
-    </form>
+          <button>Send</button>
 
-    <br>
+        </form>
 
-    <!-- geolocation  -->
-    <button id="send-location">Send Location</button>
+        <!-- geolocation  -->
+        <button id="send-location">Send location</button>
+      </div>
+
+      <!-- user input -->
+
+
+    </div>
+
+
+
+    <!-- <br> -->
+
+
 
 
     <script src="/socket.io/socket.io.js"></script>

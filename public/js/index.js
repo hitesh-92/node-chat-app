@@ -2,7 +2,7 @@ var socket = io();
 
 socket.on('connect', function() {
   console.log(`connected to server`);
-  document.getElementById('status').innerHTML = 'connected';
+  // document.getElementById('status').innerHTML = 'connected';
 
   // example - logs to terminal
   // socket.emit('createEmail', {
@@ -22,7 +22,7 @@ socket.on('connect', function() {
 
 socket.on('disconnect', function() {
   console.log(`disconnected from server`);
-  document.getElementById('status').innerHTML = 'disconnected';
+  // document.getElementById('status').innerHTML = 'disconnected';
 });
 
 //example - log newEmail from server
@@ -33,7 +33,7 @@ socket.on('disconnect', function() {
 //vid108 emitting and listening to events
 socket.on('newMessage', function(message){
   msg = `From: ${message.from} | ${message.text} | At: ${message.createdAt}`;
-  document.getElementById('test').innerHTML = msg;
+  // document.getElementById('test').innerHTML = msg;
   console.log(msg);
 
   var li = jQuery('<li></li>');
@@ -49,23 +49,25 @@ socket.on('newUser', function(msg) {
 });
 
 //vid112 - event acknowledgments
- socket.emit('createMessage', {
-   from: 'Frank',
-   text: 'Hello'
- }, function(data){
-   console.log('Got it', data);
-});
+//  socket.emit('createMessage', {
+//    from: 'Frank',
+//    text: 'Hello'
+//  }, function(data){
+//    console.log('Got it', data);
+// });
 
 
 //User input form
 jQuery('#message-form').on('submit', function(e){
   e.preventDefault();
 
+  const messageBox = jQuery('[name=message]');
+
   socket.emit('createMessage', {
     from:'User',
-    text: jQuery('[name=message]').val()
+    text: messageBox.val()
   }, function() {
-
+    messageBox.val('');
   });
 });
 
@@ -76,14 +78,23 @@ locationButton.on('click', function(){
     return alert('Geolocation not supported by browser');
   }
 
+  //disable button when sending location
+  locationButton.attr('disabled', 'disabled').text('Sending location...');
+
   navigator.geolocation.getCurrentPosition(function(position){
     // console.log(position);
+
+    //enable button once location found
+    locationButton.removeAttr('disabled').text('Send location');
+
     socket.emit('createLocationMessage', {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude
     })
     }, function(){
-      alert('unable to fetch location')
+      alert('unable to fetch location');
+      //enable button once location found
+      locationButton.removeAttr('disabled').text('Send location');
   });
 });
 

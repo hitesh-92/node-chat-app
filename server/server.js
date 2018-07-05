@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
     console.log('createMessage', message);
     //vid111
     io.emit('newMessage', generateMessage(message.from, message.text));
-    callback('this is from the server');
+    callback();
     // //send message to everyone, including yourself
     // //from browser console, run: socket.emit('createMessage', {from:'someone', text:'lorem ipsom'})
     // io.emit('newMessage', {
