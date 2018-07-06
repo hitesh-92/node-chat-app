@@ -2,85 +2,36 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>socket.io chat app</title>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.js" charset="utf-8"></script>
-
-    <!-- <style media="screen">
-      p{color: red}
-    </style> -->
-
-  <link rel="stylesheet" href="./css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>join | chat app</title>
+    <link rel="stylesheet" href="./css/styles.css">
   </head>
-  <body class="chat">
-    <!-- <p>Welcome, to the chatApp</p> -->
-    <div class="chat__sidebar">
-      <h3>Users</h3>
-      <div id="user"></div>
-    </div>
-    <!-- init testing -->
-    <!-- <p id="status"></p>
-    <p id="test"></p> -->
+  <body class="centered-form">
 
-    <!-- <br /> -->
+    <div class="centered-form__form">
 
-    <div class="chat__main">
+      <form action="/chat.html">
 
-      <ol id="messages" class="chat__messages"></ol>
+        <div class="form-field">
+          <h3>Join Chat</h3>
+        </div>
 
-      <div class="chat__footer">
-        <form id="message-form">
+        <div class="form-field">
+          <label>Display Name</label>
+          <input type="text" name="name" autofocus/>
+        </div>
 
-          <input type="text" name="message" placeholder="Enter Message" autofocus autocomplete="off" >
+        <div class="form-field">
+          <label>Room Name</label>
+          <input type="text" name="room">
+        </div>
 
-          <button>Send</button>
-
-        </form>
-
-        <!-- geolocation  -->
-        <button id="send-location">Send location</button>
-      </div>
-
-      <!-- user input -->
-
+        <div class="form-field">
+          <button>Join</button>
+        </div>
+      </form>
 
     </div>
-
-
-
-    <!-- <br> -->
-
-
-    <script id="message-template" type="text/template">
-      <li class="message">
-        <div class="message__title">
-          <h4>{{from}}</h4>
-          <span>{{createdAt}}</span>
-        </div>
-        <div class="message__body">
-          <p>{{text}}</p>
-        </div>
-      </li>
-    </script>
-
-    <script id="location-message-template" type="text/template">
-      <li class="message">
-        <div class="message__title">
-          <h4>{{from}}</h4>
-          <span>{{createdAt}}</span>
-        </div>
-        <div class="message__body">
-          <p>
-            <a href="{{url}}" target="_blank">My current location</a>
-          </p>
-        </div>
-      </li>
-    </script>
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/libs/moment.js"></script>
-    <script src="/js/libs/mustache.js"></script>
-    <script src="/js/index.js"></script>
 
   </body>
 </html>
