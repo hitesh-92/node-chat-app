@@ -6,6 +6,7 @@ const http = require('http');
 
 const port = process.env.PORT || 5050;
 const {generateMessage, generateLocationMessage} = require('./utils/message');
+const {isRealString} = require('./utils/validation');
 const publicPath = path.join(__dirname, '../public');
 // publicPath. the path to the dir is cleaner and cross-os friendly
 // console.log(__dirname + '/../public');
@@ -59,6 +60,15 @@ io.on('connection', (socket) => {
   //vid111 generateMessage & test
   socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat App'));
   socket.broadcast.emit('newMessage', generateMessage('Admin','New user joined'));
+
+  //room data
+  socket.on('join', (params, callback) => {
+    if (isRealString(params.name) || !isRealString(params.room)){
+      callback('name and room name are required');
+    }
+
+    callback();
+  });
 
   //vid108 emitting and listening to events
   socket.on('createMessage', (message, callback) => {

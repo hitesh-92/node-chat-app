@@ -19,7 +19,7 @@ function scrollToBottom(){
 };
 
 socket.on('connect', function() {
-  console.log(`connected to server`);
+  // console.log(`connected to server`);
   // document.getElementById('status').innerHTML = 'connected';
 
   // example - logs to terminal
@@ -33,6 +33,18 @@ socket.on('connect', function() {
   //   from: 'CLIENT browser',
   //   text: 'this is from index.js!'
   // });
+
+  //room data
+  const params = jQuery.deparam(window.location.search);
+
+  socket.emit('join', params, function(error){
+    if(error){
+      alert(error);
+      window.location.href = '/';
+    } else {
+      console.log('no error!');
+    }
+  });
 
 });//connect
 
