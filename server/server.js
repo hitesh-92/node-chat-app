@@ -58,14 +58,22 @@ io.on('connection', (socket) => {
   */
 
   //vid111 generateMessage & test
-  socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat App'));
-  socket.broadcast.emit('newMessage', generateMessage('Admin','New user joined'));
+
 
   //room data
   socket.on('join', (params, callback) => {
-    if (isRealString(params.name) || !isRealString(params.room)){
+    if (!isRealString(params.name) || !isRealString(params.room)){
       callback('name and room name are required');
     }
+
+    socket.join(params.room);
+    // socket.leave(RoomName);
+    // io.emit -> io.to(RoomName).emit //sends message to everyone in that room
+    // socket.broadcast.emit -> socket.broadcast.to(RoomName).emit //sends message to everyone in room expect for current user
+    // socket.emit
+
+    socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat App'));
+    socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined`));
 
     callback();
   });
