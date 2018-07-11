@@ -89,8 +89,15 @@ io.on('connection', (socket) => {
   //vid108 emitting and listening to events
   socket.on('createMessage', (message, callback) => {
     console.log('createMessage', message);
+
+    var user = users.getUser(socket.id);
+
+    if (user && isRealString(message.text)) {
+      io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+    }
+
     //vid111
-    io.emit('newMessage', generateMessage(message.from, message.text));
+
     callback();
     // //send message to everyone, including yourself
     // //from browser console, run: socket.emit('createMessage', {from:'someone', text:'lorem ipsom'})
@@ -116,7 +123,14 @@ io.on('connection', (socket) => {
 
   //Geolocation
   socket.on('createLocationMessage', (coords) => {
-    io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
+
+    var user = users.getUser(socket.id);
+
+    if (user) {
+      io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude));
+    }
+
+    // io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
 
   });//createLocationMessage
 
